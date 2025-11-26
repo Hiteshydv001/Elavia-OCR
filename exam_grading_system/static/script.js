@@ -28,6 +28,8 @@ const savedResultsSection = document.getElementById('saved-results-section');
 let savedResultsLoaded = false;
 let savedResultItems = [];
 const dashboardContent = document.getElementById('dashboard-content');
+let lastSavedResultsFetch = 0;
+const SAVED_RESULTS_THROTTLE_MS = 5000; // Throttle to 5 seconds
 
 function activateSection(sectionId) {
     sections.forEach(section => {
@@ -503,7 +505,15 @@ function setActiveAnswerSheet(name, url, sourceItem) {
 }
 
 async function loadSavedResults(forceReload = false) {
+    // Throttle API calls to prevent excessive requests
+    const now = Date.now();
+    if (!forceReload && (now - lastSavedResultsFetch) < SAVED_RESULTS_THROTTLE_MS) {
+        return; // Skip if throttled
+    }
+
+    // Always reload when forceReload is true
     if (savedResultsLoaded && !forceReload) {
+        lastSavedResultsFetch = now;
         return;
     }
 
@@ -511,6 +521,9 @@ async function loadSavedResults(forceReload = false) {
         return;
     }
 
+    lastSavedResultsFetch = now;
+
+    // Always clear the container
     savedResultsContainer.innerHTML = '';
     savedResultsEmpty.style.display = 'none';
     savedResultItems = [];
@@ -530,7 +543,21 @@ async function loadSavedResults(forceReload = false) {
             return;
         }
 
-        files.forEach(({ id, name, status, doc_type, timestamp }) => {
+        // Sort files by timestamp (newest first)
+        const sortedFiles = [...files].sort((a, b) => {
+            const timeA = new Date(a.timestamp).getTime();
+            const timeB = new Date(b.timestamp).getTime();
+            return timeB - timeA; // descending order
+        });
+
+        // Deduplicate by id to avoid showing duplicates
+        const seen = new Set();
+        sortedFiles.forEach(({ id, name, status, doc_type, timestamp }) => {
+            if (seen.has(id)) {
+                return; // skip duplicates
+            }
+            seen.add(id);
+
             const item = document.createElement('div');
             item.className = 'doc-item';
             item.dataset.id = id;
