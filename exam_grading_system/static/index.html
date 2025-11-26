@@ -6,9 +6,62 @@
     <title>Elavia OCR</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap">
-    <link rel="stylesheet" href="/static/styles.css">
+    <!-- Main stylesheet loaded dynamically when backend is active -->
+    <link rel="stylesheet" id="main-styles" href="/static/styles.css" media="(prefers-color-scheme: light)">
+    <style>
+        /* Minimal inline styles for loading state */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #ffffff;
+            color: #000000;
+        }
+        .loading-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100vh;
+            flex-direction: column;
+            gap: 24px;
+        }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #f0f0f0;
+            border-top: 3px solid #000000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .loading-text {
+            font-size: 16px;
+            color: #333333;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .backend-status {
+            margin-top: 12px;
+            font-size: 12px;
+            color: #666666;
+        }
+    </style>
 </head>
 <body>
+<!-- Loading screen shown initially -->
+<div id="loading-screen" class="loading-screen">
+    <div class="loading-spinner"></div>
+    <p class="loading-text">Connecting to backend...</p>
+    <p class="backend-status" id="backend-status">Checking connection...</p>
+</div>
+
+<!-- Main app (hidden until backend is active) -->
+<div id="app-container" style="display: none;">
 <!-- Backend Connection Warning Modal -->
 <div id="backend-warning-modal" class="modal-overlay">
     <div class="modal-content">
@@ -239,6 +292,7 @@
         </section>
     </main>
 </div>
+</div><!-- Close app-container -->
 
 <script src="/static/script.js"></script>
 </body>

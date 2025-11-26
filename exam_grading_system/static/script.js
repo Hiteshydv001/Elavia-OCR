@@ -1,3 +1,171 @@
+// ===== Backend Connection Check =====
+// Check if backend is active before loading the app
+async function checkBackendConnection() {
+    const loadingScreen = document.getElementById('loading-screen');
+    const appContainer = document.getElementById('app-container');
+    const backendStatus = document.getElementById('backend-status');
+    const mainStyles = document.getElementById('main-styles');
+    
+    try {
+        // Try to reach the backend
+        const response = await fetch('/api/question-papers', { 
+            method: 'GET',
+            timeout: 5000 
+        });
+        
+        if (response.ok) {
+            // Backend is active - load the app
+            backendStatus.textContent = 'Backend connected successfully!';
+            
+            // Load main stylesheet
+            mainStyles.media = 'all';
+            mainStyles.removeAttribute('media');
+            
+            // Show app and hide loading screen
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                appContainer.style.display = 'block';
+                initializeApp();
+            }, 500);
+            return true;
+        } else {
+            throw new Error('Backend returned error status');
+        }
+    } catch (error) {
+        console.error('Backend connection failed:', error);
+        backendStatus.textContent = 'Backend unreachable. Some features may not work.';
+        backendStatus.style.color = '#ff6b6b';
+        
+        // Still load the app but with limited functionality
+        mainStyles.media = 'all';
+        mainStyles.removeAttribute('media');
+        
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            appContainer.style.display = 'block';
+            initializeApp();
+        }, 2000);
+        return false;
+    }
+}
+
+// Initialize app after backend check
+function initializeApp() {
+    const form = document.getElementById('uploadForm');
+    const navLinks = document.querySelectorAll('.nav-link[data-target]');
+    const sections = document.querySelectorAll('.view-section');
+    
+    if (!form) return;
+    
+    // Continue with normal initialization
+    setupNavigation();
+    setupFormHandler();
+    showBackendWarningModal();
+}
+
+function setupNavigation() {
+    const navLinks = document.querySelectorAll('.nav-link[data-target]');
+    const sections = document.querySelectorAll('.view-section');
+    
+    navLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const target = link.dataset.target;
+            if (target) {
+                activateSection(target);
+                if (target === 'view-question-papers') {
+                    loadQuestionPapers();
+                } else if (target === 'view-answer-sheets') {
+                    loadAnswerSheets();
+                }
+            }
+        });
+    });
+    
+    activateSection('view-dashboard');
+    loadQuestionPapers();
+    loadAnswerSheets();
+    loadSavedResults();
+}
+
+function setupFormHandler() {
+    const form = document.getElementById('uploadForm');
+    if (!form) return;
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const loading = document.getElementById('loading');
+        const resultsArea = document.getElementById('results-area');
+        const resultsPlaceholder = document.getElementById('results-placeholder');
+        const parsedContent = document.getElementById('parsed-content');
+        
+        // Reset UI
+        resultsArea.style.display = 'none';
+        if (resultsPlaceholder) {
+            resultsPlaceholder.style.display = 'block';
+        }
+        loading.style.display = 'block';
+        parsedContent.innerHTML = '';
+        
+        const fileInput = document.getElementById('fileInput');
+        const docType = document.getElementById('docType').value;
+        const ocrEngine = document.getElementById('ocrEngine').value;
+        
+        if(fileInput.files.length === 0) {
+            alert("Please select a file!");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+        formData.append('doc_type', docType);
+        formData.append('ocr_engine', ocrEngine);
+
+        try {
+            const response = await fetch('/api/upload', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (!response.ok) throw new Error("Upload failed");
+            
+            const data = await response.json();
+            const docId = data.id;
+            
+            pollResults(docId);
+            
+        } catch (error) {
+            alert("Error: " + error.message);
+            loading.style.display = 'none';
+        }
+    });
+}
+
+function showBackendWarningModal() {
+    document.addEventListener('DOMContentLoaded', () => {
+        const backendWarningModal = document.getElementById('backend-warning-modal');
+        const closeWarningBtn = document.getElementById('close-backend-warning');
+        
+        if (backendWarningModal && closeWarningBtn) {
+            backendWarningModal.classList.remove('hidden');
+            
+            closeWarningBtn.addEventListener('click', () => {
+                backendWarningModal.classList.add('hidden');
+            });
+            
+            // Allow closing by clicking outside the modal
+            backendWarningModal.addEventListener('click', (event) => {
+                if (event.target === backendWarningModal) {
+                    backendWarningModal.classList.add('hidden');
+                }
+            });
+        }
+    });
+}
+
+// ===== Original App Code =====
+
 const form = document.getElementById('uploadForm');
 const loading = document.getElementById('loading');
 const resultsArea = document.getElementById('results-area');
@@ -737,4 +905,12 @@ function displaySavedResult(data) {
     } else {
         parsedContent.innerHTML = "<div class='alert'>No structured data extracted. Check Raw JSON.</div>";
     }
+}
+
+// ===== Start Backend Connection Check =====
+// Run backend check when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkBackendConnection);
+} else {
+    checkBackendConnection();
 }
