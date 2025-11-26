@@ -1,12 +1,6 @@
 // ===== Backend Connection Check =====
 // Initialize app immediately for UI demo
 async function checkBackendConnection() {
-    const mainStyles = document.getElementById('main-styles');
-    
-    // Load main stylesheet immediately
-    mainStyles.media = 'all';
-    mainStyles.removeAttribute('media');
-    
     // Initialize app and show deployment notice
     initializeApp();
     showBackendNotice();
