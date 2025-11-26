@@ -53,7 +53,7 @@ upload/
 uploads/
 results/
 
-*.pdf
+
 *.jpg
 *.jpeg
 
