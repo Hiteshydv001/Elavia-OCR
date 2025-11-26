@@ -1,0 +1,20 @@
+fastapi
+uvicorn
+python-multipart
+pymongo
+motor
+boto3             # For AWS Textract
+opencv-python     # For removing notebook lines
+numpy
+pymupdf           # For PDF to image conversion
+pillow            # For image handling
+google-generativeai  # For Gemini API
+pytesseract       # For Tesseract OCR
+paddlepaddle      # For PaddleOCR
+paddleocr         # For PaddleOCR
+openai            # For OpenRouter API (Qwen)
+requests          # For HTTP requests
+surya-ocr         # For advanced layout-aware OCR
+pydantic
+pydantic-settings
+python-dotenv

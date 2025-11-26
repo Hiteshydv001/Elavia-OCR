@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elavia OCR</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="dashboard">
+    <aside class="sidebar">
+        <div class="brand">
+            <img src="/static/logo.png" alt="Evalvia.Ai" class="brand-logo-image">
+            <div class="brand-info">
+                <h1>Evalvia</h1>
+                <p class="brand-subtitle">AI-Powered Document Intake & Extraction</p>
+            </div>
+        </div>
+        <div class="nav-section">
+            <span class="nav-group-title">Navigation</span>
+            <div class="nav-links">
+                <a class="nav-link active" data-target="view-dashboard" href="#">Dashboard</a>
+                <a class="nav-link" data-target="view-uploads" href="#">Uploads</a>
+                <a class="nav-link" data-target="view-results" href="#">Results</a>
+            </div>
+        </div>
+        <div class="nav-section">
+            <span class="nav-group-title">Records</span>
+            <div class="nav-links">
+                <a class="nav-link" data-target="view-question-papers" href="#">Question Papers</a>
+                <a class="nav-link" data-target="view-answer-sheets" href="#">Answer Sheets</a>
+            </div>
+        </div>
+        <div class="sidebar-footer">
+            <div class="ai-insight-card">
+                <h3>AI Insight Hub</h3>
+                <p>Monitor OCR accuracy, model drift, and automated grading summaries in real-time.</p>
+            </div>
+            <a class="nav-link" href="https://github.com/your-org/your-repo" target="_blank" rel="noopener noreferrer">
+                <span class="nav-link-icon">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2 .37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.68 7.68 0 018 4.6c.68.003 1.36.092 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.28.24.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8 8 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                </span>
+                GitHub
+            </a>
+        </div>
+    </aside>
+
+    <main class="main-area">
+        <header class="topbar">
+            <div class="topbar-content">
+                <div class="platform-info">AI-Powered Document Intake & Extraction Microservice</div>
+            </div>
+            <div class="topbar-actions">
+                <img src="/static/logo.png" alt="Evalvia" class="topbar-logo">
+            </div>
+        </header>
+
+        <section id="view-dashboard" class="view-section active">
+            <div class="main-grid">
+                <article class="card diagnostics-card">
+                    <div class="card-title">
+                        <h2>OCR Dashboard</h2>
+                        <span>Track your latest uploads</span>
+                    </div>
+                    <div class="preview-image" id="dashboard-stats">
+                        <span class="badge-scan">Upload ready</span>
+                        <p id="dashboard-content">Loading stats...</p>
+                    </div>
+                </article>
+                <article class="card info-card">
+                    <div class="card-title">
+                        <h3>Quick Tips</h3>
+                        <span>Choose the right OCR engine</span>
+                    </div>
+                    <ul class="tip-list">
+                        <li><strong>Gemini:</strong> Best for complex layouts & AI-assisted understanding (95%+ accuracy)</li>
+                        <li><strong>Tesseract:</strong> Fast processing for standard printed text (85-90% accuracy)</li>
+                        <li><strong>Paddle:</strong> Excellent for handwritten text & multilingual content</li>
+                        <li><strong>Qwen-2.5-VL-32B:</strong> Best for structured documents with visual understanding</li>
+                        <li><strong>Surya:</strong> Layout-aware extraction for complex document structures (92%+ accuracy)</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section id="view-uploads" class="view-section">
+            <div class="card form-card full-width">
+                <div class="card-title">
+                    <h3>New Intake</h3>
+                    <span>Upload PDF or images</span>
+                </div>
+                <form id="uploadForm">
+                    <label for="fileInput">Select Document</label>
+                    <input type="file" id="fileInput" required>
+
+                    <label for="docType">Document Type</label>
+                    <select id="docType">
+                        <option value="question_paper">Question Paper (Printed)</option>
+                        <option value="answer_sheet">Student Answer Sheet (Handwritten)</option>
+                    </select>
+
+                    <label for="ocrEngine">OCR Engine</label>
+                    <select id="ocrEngine">
+                        <option value="gemini">Gemini (AI-based)</option>
+                        <option value="tesseract">Tesseract</option>
+                        <option value="paddle">PaddleOCR</option>
+                        <option value="qwen">Qwen-2.5-VL-32B</option>
+                        <option value="surya">Surya OCR</option>
+                    </select>
+
+                    <button type="submit">Upload &amp; Process</button>
+                </form>
+                <div id="loading" class="loading-indicator">
+                    Processing... please wait.
+                </div>
+            </div>
+        </section>
+
+        <section id="view-results" class="view-section">
+            <div id="results-placeholder" class="card placeholder-card">
+                <h3>Results</h3>
+                <p>No processed documents yet. Upload a file and check back here.</p>
+            </div>
+            <div id="saved-results-section" style="display:none;">
+                <div class="card simple-card">
+                    <div class="card-title">
+                        <h3>Saved Results</h3>
+                        <span>View previous scans</span>
+                    </div>
+                    <div id="saved-results-container" class="doc-list"></div>
+                    <p id="saved-results-empty" class="muted-text" style="display:none;">No saved results found.</p>
+                </div>
+            </div>
+            <section id="results-area" class="results-grid" style="display: none;">
+                <article class="card results-card">
+                    <div class="card-title">
+                        <h3>Parsed Extraction</h3>
+                        <span id="status-label" class="status-badge">Awaiting</span>
+                    </div>
+                    <div id="parsed-content" class="list-group"></div>
+                </article>
+
+                <aside class="card raw-card">
+                    <div class="card-title">
+                        <h3>Raw Outputs</h3>
+                        <span>Review OCR confidence</span>
+                    </div>
+                    <div>
+                        <h4 style="margin:0 0 10px; font-size:0.9rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-secondary);">Raw Extracted Text</h4>
+                        <pre id="raw-text" class="json-box">No raw text available.</pre>
+                    </div>
+                    <button class="toggle-btn" onclick="toggleJson()">Toggle Raw JSON</button>
+                    <pre id="json-output" class="json-box" style="display:none;"></pre>
+                </aside>
+            </section>
+        </section>
+
+        <section id="view-question-papers" class="view-section">
+            <div class="card simple-card">
+                <div class="card-title">
+                    <h3>Question Papers</h3>
+                    <span>Available files</span>
+                </div>
+                <div id="question-papers-container" class="doc-list"></div>
+                <p id="question-papers-empty" class="muted-text" style="display:none;">No question papers found in the pdf directory.</p>
+                <p id="question-papers-viewer-placeholder" class="muted-text" style="display:none;">Select a question paper to preview.</p>
+                <div id="question-papers-viewer-wrapper" class="doc-viewer" style="display:none;">
+                    <iframe id="question-papers-viewer" title="Question Paper Preview"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section id="view-answer-sheets" class="view-section">
+            <div class="card simple-card">
+                <div class="card-title">
+                    <h3>Answer Sheets</h3>
+                    <span>Available scans</span>
+                </div>
+                <div id="answer-sheets-container" class="doc-list"></div>
+                <p id="answer-sheets-empty" class="muted-text" style="display:none;">No answer sheets found.</p>
+                <p id="answer-sheets-viewer-placeholder" class="muted-text" style="display:none;">Select an answer sheet to preview.</p>
+                <div id="answer-sheets-viewer-wrapper" class="doc-viewer" style="display:none;">
+                    <iframe id="answer-sheets-viewer" title="Answer Sheet Preview"></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script src="/static/script.js"></script>
+</body>
+</html>
