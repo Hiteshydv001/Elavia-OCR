@@ -62,18 +62,22 @@
 
 <!-- Main app (hidden until backend is active) -->
 <div id="app-container" style="display: none;">
-<!-- Backend Connection Warning Modal -->
-<div id="backend-warning-modal" class="modal-overlay">
-    <div class="modal-content">
-        <h2>Backend Connection Notice</h2>
-        <p>The backend API is currently running on the free tier of Render. This means:</p>
-        <ul>
-            <li>API calls may experience delays due to cold starts</li>
-            <li>Processing may take longer than usual</li>
-            <li>Service may briefly pause if inactive</li>
-        </ul>
-        <p><strong>For the best experience, deploy the backend to a production-tier service.</strong></p>
-        <button id="close-backend-warning" class="btn-primary">Got it, Continue Exploring</button>
+<!-- Backend Deployment Notice Modal -->
+<div id="backend-notice-modal" class="modal-overlay">
+    <div class="modal-content deployment-notice">
+        <h2>About This Demo</h2>
+        <p style="margin-bottom: 16px;">This is a <strong>UI demonstration</strong> of the Elavia.Ai platform. Please note:</p>
+        <div style="background: #f8f8f8; border-left: 4px solid #ff6b6b; padding: 16px; margin: 16px 0; border-radius: 4px;">
+            <p style="margin: 0 0 12px; font-weight: 600; color: #ff6b6b;">Backend Status: Not Deployed</p>
+            <ul style="margin: 8px 0; padding-left: 20px;">
+                <li>Backend is running locally and not hosted on Render</li>
+                <li>Local OCR models (Tesseract, Paddle, Surya) cannot run on free tier services</li>
+                <li>The upload and processing features are <strong>for demonstration purposes only</strong></li>
+                <li>You can still explore the UI, view the dashboard, and check the video walkthrough</li>
+            </ul>
+        </div>
+        <p style="margin: 16px 0 0; font-size: 13px; color: #666;"><strong>To see full functionality:</strong> Deploy the backend to a production server with sufficient resources for model inference.</p>
+        <button id="close-backend-notice" class="btn-primary">I Understand, Explore UI</button>
     </div>
 </div>
 

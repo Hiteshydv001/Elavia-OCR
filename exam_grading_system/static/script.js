@@ -3,49 +3,67 @@
 async function checkBackendConnection() {
     const loadingScreen = document.getElementById('loading-screen');
     const appContainer = document.getElementById('app-container');
-    const backendStatus = document.getElementById('backend-status');
     const mainStyles = document.getElementById('main-styles');
     
+    // Load main stylesheet
+    mainStyles.media = 'all';
+    mainStyles.removeAttribute('media');
+    
     try {
-        // Try to reach the backend
+        // Try to reach the backend with a short timeout
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        
         const response = await fetch('/api/question-papers', { 
             method: 'GET',
-            timeout: 5000 
+            signal: controller.signal
         });
         
+        clearTimeout(timeoutId);
+        
         if (response.ok) {
-            // Backend is active - load the app
-            backendStatus.textContent = 'Backend connected successfully!';
+            // Backend is active - load the app immediately (no loading screen)
+            console.log('Backend connected successfully!');
             
-            // Load main stylesheet
-            mainStyles.media = 'all';
-            mainStyles.removeAttribute('media');
-            
-            // Show app and hide loading screen
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-                appContainer.style.display = 'block';
-                initializeApp();
-            }, 500);
+            // Show app immediately, hide loading screen
+            loadingScreen.style.display = 'none';
+            appContainer.style.display = 'block';
+            initializeApp();
+            showBackendNotice();
             return true;
         } else {
             throw new Error('Backend returned error status');
         }
     } catch (error) {
         console.error('Backend connection failed:', error);
-        backendStatus.textContent = 'Backend unreachable. Some features may not work.';
-        backendStatus.style.color = '#ff6b6b';
         
-        // Still load the app but with limited functionality
-        mainStyles.media = 'all';
-        mainStyles.removeAttribute('media');
+        // Backend unreachable - show app with notice
+        loadingScreen.style.display = 'none';
+        appContainer.style.display = 'block';
+        initializeApp();
+        showBackendNotice();
         
-        setTimeout(() => {
-            loadingScreen.style.display = 'none';
-            appContainer.style.display = 'block';
-            initializeApp();
-        }, 2000);
         return false;
+    }
+}
+
+// Show deployment notice to all visitors
+function showBackendNotice() {
+    const noticeModal = document.getElementById('backend-notice-modal');
+    const closeBtn = document.getElementById('close-backend-notice');
+    
+    if (noticeModal && closeBtn) {
+        noticeModal.style.display = 'flex';
+        closeBtn.addEventListener('click', () => {
+            noticeModal.style.display = 'none';
+        });
+        
+        // Close on background click
+        noticeModal.addEventListener('click', (e) => {
+            if (e.target === noticeModal) {
+                noticeModal.style.display = 'none';
+            }
+        });
     }
 }
 
@@ -60,7 +78,6 @@ function initializeApp() {
     // Continue with normal initialization
     setupNavigation();
     setupFormHandler();
-    showBackendWarningModal();
 }
 
 function setupNavigation() {
@@ -142,27 +159,6 @@ function setupFormHandler() {
     });
 }
 
-function showBackendWarningModal() {
-    document.addEventListener('DOMContentLoaded', () => {
-        const backendWarningModal = document.getElementById('backend-warning-modal');
-        const closeWarningBtn = document.getElementById('close-backend-warning');
-        
-        if (backendWarningModal && closeWarningBtn) {
-            backendWarningModal.classList.remove('hidden');
-            
-            closeWarningBtn.addEventListener('click', () => {
-                backendWarningModal.classList.add('hidden');
-            });
-            
-            // Allow closing by clicking outside the modal
-            backendWarningModal.addEventListener('click', (event) => {
-                if (event.target === backendWarningModal) {
-                    backendWarningModal.classList.add('hidden');
-                }
-            });
-        }
-    });
-}
 
 // ===== Original App Code =====
 
