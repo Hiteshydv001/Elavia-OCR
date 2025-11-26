@@ -4,7 +4,7 @@
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 1. [Overview](#overview)
 2. [Features](#features)
@@ -18,51 +18,51 @@
 10. [Frontend Usage](#frontend-usage)
 11. [OCR Engines](#ocr-engines)
 12. [Result Storage & Retrieval](#result-storage--retrieval)
-13. [Troubleshooting](#troubleshooting)
+13. [Troubleshooting]
 
 ---
 
-## 🎯 Overview
+## Overview
 
 This microservice provides an end-to-end solution for:
-- **Document Upload**: Accept PDF and image files for processing
-- **OCR Processing**: Extract text using multiple OCR engines (Gemini, Tesseract, Paddle, Qwen, Surya)
-- **Smart Parsing**: Automatically parse question papers and answer sheets into structured JSON
-- **Result Persistence**: Store OCR results as JSON files and MongoDB documents
-- **Modern UI**: Clean, responsive black-and-white interface with real-time progress tracking
-- **PDF Viewing**: Embedded viewers for question papers and answer sheets
+- Document Upload: Accept PDF and image files for processing
+- OCR Processing: Extract text using multiple OCR engines (Gemini, Tesseract, Paddle, Qwen, Surya)
+- Smart Parsing: Automatically parse question papers and answer sheets into structured JSON
+- Result Persistence: Store OCR results as JSON files and MongoDB documents
+- Modern UI: Clean, responsive black-and-white interface with real-time progress tracking
+- PDF Viewing: Embedded viewers for question papers and answer sheets
 
 ---
 
-## ✨ Features
+## Features
 
 ### Core Capabilities
-✅ Multi-engine OCR support (5 engines: Gemini, Tesseract, Paddle, Qwen, Surya)
-✅ Asynchronous background processing with real-time polling
-✅ Automatic document type detection (question paper vs. answer sheet)
-✅ Handwriting preprocessing for improved accuracy on answer sheets
-✅ Dual storage: MongoDB for quick access + JSON files for persistence
-✅ RESTful API for all operations
-✅ Embedded PDF viewer for question papers and answer sheets
-✅ Saved results management with meaningful file naming
+- Multi-engine OCR support (5 engines: Gemini, Tesseract, Paddle, Qwen, Surya)
+- Asynchronous background processing with real-time polling
+- Automatic document type detection (question paper vs. answer sheet)
+- Handwriting preprocessing for improved accuracy on answer sheets
+- Dual storage: MongoDB for quick access + JSON files for persistence
+- RESTful API for all operations
+- Embedded PDF viewer for question papers and answer sheets
+- Saved results management with meaningful file naming
 
 ### UI/UX
-✅ Tab-based navigation (Dashboard, Uploads, Results, Question Papers, Answer Sheets)
-✅ Monospace typography (JetBrains Mono, Courier Prime) for technical aesthetic
-✅ Black and white minimalist design
-✅ Live progress indicator with status updates during processing
-✅ Comprehensive results display with parsed extraction and raw outputs
-✅ GitHub integration link in sidebar
+- Tab-based navigation (Dashboard, Uploads, Results, Question Papers, Answer Sheets)
+- Monospace typography (JetBrains Mono, Courier Prime) for technical aesthetic
+- Black and white minimalist design
+- Live progress indicator with status updates during processing
+- Comprehensive results display with parsed extraction and raw outputs
+- GitHub integration link in sidebar
 
 ### Dashboard
-✅ Real-time summary of all processed documents
-✅ Count of completed, failed, and processing results
-✅ Quick tips for improving OCR accuracy
-✅ AI Insight Hub section for monitoring
+- Real-time summary of all processed documents
+- Count of completed, failed, and processing results
+- Quick tips for improving OCR accuracy
+- AI Insight Hub section for monitoring
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -113,36 +113,36 @@ This microservice provides an end-to-end solution for:
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Backend
-- **Framework**: FastAPI (async/await, high performance)
-- **Database**: MongoDB with Motor (async driver)
-- **OCR Engines**: 
+- Framework: FastAPI (async/await, high performance)
+- Database: MongoDB with Motor (async driver)
+- OCR Engines: 
   - Google Gemini API
   - Tesseract (open-source)
   - PaddleOCR
   - Qwen-2.5-VL-32B
   - Surya OCR
-- **Image Processing**: Pillow (PIL), PyMuPDF (fitz)
-- **Task Processing**: Python asyncio (background tasks)
+- Image Processing: Pillow (PIL), PyMuPDF (fitz)
+- Task Processing: Python asyncio (background tasks)
 
 ### Frontend
-- **Language**: Vanilla JavaScript (no frameworks)
-- **Markup**: HTML5
-- **Styling**: CSS3 (CSS variables, animations, gradients)
-- **Fonts**: JetBrains Mono, Courier Prime (monospace)
-- **PDF Viewing**: iframe-based PDF viewer
-- **API Communication**: Fetch API
+- Language: Vanilla JavaScript (no frameworks)
+- Markup: HTML5
+- Styling: CSS3 (CSS variables, animations, gradients)
+- Fonts: JetBrains Mono, Courier Prime (monospace)
+- PDF Viewing: iframe-based PDF viewer
+- API Communication: Fetch API
 
 ### Infrastructure
-- **Server**: Uvicorn (ASGI)
-- **Python Version**: 3.9+
-- **Virtual Environment**: venv
+- Server: Uvicorn (ASGI)
+- Python Version: 3.9+
+- Virtual Environment: venv
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 exam_grading_system/
@@ -174,12 +174,11 @@ exam_grading_system/
 ├── .gitignore                 # Git ignore rules
 ├── README.md                  # This file
 └── venv/                      # Virtual environment
-
 ```
 
 ---
 
-## 📦 Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
 - Python 3.9+
@@ -202,8 +201,9 @@ python -m venv venv
 
 **Windows (PowerShell):**
 ```powershell
-.\venv\Scripts\Activate.ps1
-```
+.
+v
+```bash
 
 **Windows (Command Prompt):**
 ```cmd
@@ -250,7 +250,7 @@ sudo apt-get install tesseract-ocr
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 ### `app/core/config.py`
 Contains all application settings:
@@ -279,7 +279,7 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "")
 
 ---
 
-## 🚀 Running the Application
+## Running the Application
 
 ### Start the Backend Server
 ```bash
@@ -308,7 +308,7 @@ You should see:
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### Document Upload & Processing
 
@@ -389,7 +389,10 @@ You should see:
   ```json
   {
     "files": [
-      {"name": "math_exam.pdf", "url": "/pdfs/math_exam.pdf"}
+      {
+        "name": "math_exam.pdf",
+        "url": "/pdfs/math_exam.pdf"
+      }
     ]
   }
   ```
@@ -400,7 +403,10 @@ You should see:
   ```json
   {
     "files": [
-      {"name": "eng_1.pdf", "url": "/pdfs/eng_1.pdf"}
+      {
+        "name": "eng_1.pdf",
+        "url": "/pdfs/eng_1.pdf"
+      }
     ]
   }
   ```
@@ -418,7 +424,7 @@ You should see:
 
 ---
 
-## 💻 Frontend Usage
+## Frontend Usage
 
 ### Dashboard
 - Displays real-time statistics:
@@ -427,19 +433,19 @@ You should see:
   - Quick tips for improving accuracy
 
 ### Uploads Tab
-1. Click **"Select Document"** to choose a PDF or image
-2. Select **"Document Type"**: `Question Paper` or `Answer Sheet`
-3. Choose **"OCR Engine"**: Gemini, Tesseract, Paddle, Qwen, or Surya
-4. Click **"Upload & Process"**
-5. Watch the centered **loading indicator** with real-time progress
-6. Results auto-display in the **Results tab** when complete
+1. Click "Select Document" to choose a PDF or image
+2. Select "Document Type": `Question Paper` or `Answer Sheet`
+3. Choose "OCR Engine": Gemini, Tesseract, Paddle, Qwen, or Surya
+4. Click "Upload & Process"
+5. Watch the centered loading indicator with real-time progress
+6. Results auto-display in the Results tab when complete
 
 ### Results Tab
-- **Saved Results** section lists all previous OCR outputs
-- Click **"View"** to display:
-  - **Parsed Extraction**: Structured questions with confidence indicators
-  - **Raw Outputs**: Full extracted text from each page
-  - **Raw JSON**: Complete API response (toggle via button)
+- Saved Results section lists all previous OCR outputs
+- Click "View" to display:
+  - Parsed Extraction: Structured questions with confidence indicators
+  - Raw Outputs: Full extracted text from each page
+  - Raw JSON: Complete API response (toggle via button)
 - Each result shows:
   - Document name (extracted from content or filename)
   - Status (Completed/Failed)
@@ -452,36 +458,36 @@ You should see:
 - Download links available for each document
 
 ### Sidebar Navigation
-- **Dashboard**: Home with stats
-- **Uploads**: Document submission
-- **Results**: View all OCR outputs
-- **Question Papers**: View and download stored PDFs
-- **Answer Sheets**: View and download answer sheets
-- **GitHub**: External link to repository
+- Dashboard: Home with stats
+- Uploads: Document submission
+- Results: View all OCR outputs
+- Question Papers: View and download stored PDFs
+- Answer Sheets: View and download answer sheets
+- GitHub: External link to repository
 
 ---
 
-## 🧠 OCR Engines
+## OCR Engines
 
 ### Comparison
 
 | Engine | Speed | Accuracy | Cost | Best For |
 |--------|-------|----------|------|----------|
-| **Gemini** | Medium | Excellent (95%+) | Paid API | Complex layouts, AI-assisted understanding |
-| **Tesseract** | Fast | Good (85-90%) | Free (open-source) | Standard printed text |
-| **Paddle** | Fast | Good (85-90%) | Free | Multilingual text, both printed & handwriting |
-| **Qwen-2.5-VL-32B** | Slow | Excellent (90%+) | Paid API | Structured documents, visual understanding |
-| **Surya** | Medium | Excellent (92%+) | Free | Layout-aware extraction, complex documents |
+| Gemini | Medium | Excellent (95%+) | Paid API | Complex layouts, AI-assisted understanding |
+| Tesseract | Fast | Good (85-90%) | Free (open-source) | Standard printed text |
+| Paddle | Fast | Good (85-90%) | Free | Multilingual text, both printed & handwriting |
+| Qwen-2.5-VL-32B | Slow | Excellent (90%+) | Paid API | Structured documents, visual understanding |
+| Surya | Medium | Excellent (92%+) | Free | Layout-aware extraction, complex documents |
 
 ### Selection Guide
-- **Question Papers**: Surya or Gemini (preserve structure)
-- **Handwritten Answer Sheets**: Paddle or Qwen (handles cursive)
-- **Quick Processing**: Tesseract (fastest)
-- **Highest Accuracy**: Gemini or Qwen
+- Question Papers: Surya or Gemini (preserve structure)
+- Handwritten Answer Sheets: Paddle or Qwen (handles cursive)
+- Quick Processing: Tesseract (fastest)
+- Highest Accuracy: Gemini or Qwen
 
 ---
 
-## 💾 Result Storage & Retrieval
+## Result Storage & Retrieval
 
 ### File Naming Strategy
 Results are saved with meaningful names based on extracted content:
@@ -522,43 +528,43 @@ If content extraction fails, falls back to original filename.
 ```
 
 ### Why Dual Storage?
-- **MongoDB**: Fast queries, real-time status updates during processing
-- **JSON Files**: Portable, human-readable, searchable, version-control friendly
+- MongoDB: Fast queries, real-time status updates during processing
+- JSON Files: Portable, human-readable, searchable, version-control friendly
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Issue: "No active scans" on Dashboard
-**Solution**: Ensure saved results exist in the `results/` folder. Check that OCR tasks completed successfully.
+Solution: Ensure saved results exist in the `results/` folder. Check that OCR tasks completed successfully.
 
 ### Issue: Loading indicator stuck
-**Solution**: Check browser console (F12) for errors. Verify backend is running (`uvicorn` terminal). Check `/api/results/{docId}` in Network tab.
+Solution: Check browser console (F12) for errors. Verify backend is running (`uvicorn` terminal). Check `/api/results/{docId}` in Network tab.
 
 ### Issue: PDFs not showing in Question Papers/Answer Sheets
-**Solution**: Place PDF files in the `pdf/` directory. Ensure filenames match config in `app/core/config.py` for answer sheets.
+Solution: Place PDF files in the `pdf/` directory. Ensure filenames match config in `app/core/config.py` for answer sheets.
 
 ### Issue: Tesseract "not found" error
-**Solution**: Install Tesseract system-wide:
-- **Windows**: Download installer from UB-Mannheim/tesseract GitHub
-- **Mac**: `brew install tesseract`
-- **Linux**: `sudo apt-get install tesseract-ocr`
+Solution: Install Tesseract system-wide:
+- Windows: Download installer from UB-Mannheim/tesseract GitHub
+- Mac: `brew install tesseract`
+- Linux: `sudo apt-get install tesseract-ocr`
 
 ### Issue: Gemini API fails
-**Solution**: Verify `GOOGLE_API_KEY` in `.env` is correct. Ensure API is enabled in Google Cloud Console.
+Solution: Verify `GOOGLE_API_KEY` in `.env` is correct. Ensure API is enabled in Google Cloud Console.
 
 ### Issue: MongoDB connection timeout
-**Solution**: Verify `MONGODB_URL` in `.env`. Check internet connection. Ensure MongoDB Atlas IP whitelist includes your machine.
+Solution: Verify `MONGODB_URL` in `.env`. Check internet connection. Ensure MongoDB Atlas IP whitelist includes your machine.
 
 ### Issue: Results not persisting to `results/` folder
-**Solution**: Ensure `results/` directory exists and is writable. Check backend logs for file I/O errors.
+Solution: Ensure `results/` directory exists and is writable. Check backend logs for file I/O errors.
 
 ### Issue: Timestamps showing incorrect time
-**Solution**: The app uses local system timezone. Set your system timezone correctly. Timestamps are stored in ISO 8601 format with timezone offset.
+Solution: The app uses local system timezone. Set your system timezone correctly. Timestamps are stored in ISO 8601 format with timezone offset.
 
 ---
 
-## 🔧 Development Notes
+## Development Notes
 
 ### Adding a New OCR Engine
 1. Create `app/services/newengine_service.py`
@@ -590,7 +596,7 @@ This project is part of the Evalvia.Ai platform. All rights reserved.
 
 ---
 
-## 📞 Support
+## Support
 
 For issues or questions:
 1. Check the [Troubleshooting](#troubleshooting) section
@@ -600,7 +606,7 @@ For issues or questions:
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
 For production deployment:
 1. Set `DEBUG=False` in config
@@ -618,7 +624,7 @@ gunicorn app.main:app -w 4 -b 0.0.0.0:8000
 
 ---
 
-**Built with ❤️ using FastAPI, MongoDB, and Vanilla JavaScript**
+Built with love using FastAPI, MongoDB, and Vanilla JavaScript
 
-**Version**: 1.0.0  
-**Last Updated**: November 26, 2025
+Version: 1.0.0  
+Last Updated: November 26, 2025
