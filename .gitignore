@@ -52,9 +52,8 @@ Thumbs.db
 upload/
 uploads/
 results/
-pdf/
+
 *.pdf
-*.png
 *.jpg
 *.jpeg
 
