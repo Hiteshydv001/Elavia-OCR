@@ -4,7 +4,7 @@
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 1. [Overview](#overview)
 2. [Features](#features)
@@ -22,7 +22,7 @@
 
 ---
 
-## 🎯 Overview
+## Overview
 
 This microservice provides an end-to-end solution for:
 - **Document Upload**: Accept PDF and image files for processing
@@ -34,35 +34,35 @@ This microservice provides an end-to-end solution for:
 
 ---
 
-## ✨ Features
+## Features
 
 ### Core Capabilities
-✅ Multi-engine OCR support (5 engines: Gemini, Tesseract, Paddle, Qwen, Surya)
-✅ Asynchronous background processing with real-time polling
-✅ Automatic document type detection (question paper vs. answer sheet)
-✅ Handwriting preprocessing for improved accuracy on answer sheets
-✅ Dual storage: MongoDB for quick access + JSON files for persistence
-✅ RESTful API for all operations
-✅ Embedded PDF viewer for question papers and answer sheets
-✅ Saved results management with meaningful file naming
+- Multi-engine OCR support (5 engines: Gemini, Tesseract, Paddle, Qwen, Surya)
+- Asynchronous background processing with real-time polling
+- Automatic document type detection (question paper vs. answer sheet)
+- Handwriting preprocessing for improved accuracy on answer sheets
+- Dual storage: MongoDB for quick access + JSON files for persistence
+- RESTful API for all operations
+- Embedded PDF viewer for question papers and answer sheets
+- Saved results management with meaningful file naming
 
 ### UI/UX
-✅ Tab-based navigation (Dashboard, Uploads, Results, Question Papers, Answer Sheets)
-✅ Monospace typography (JetBrains Mono, Courier Prime) for technical aesthetic
-✅ Black and white minimalist design
-✅ Live progress indicator with status updates during processing
-✅ Comprehensive results display with parsed extraction and raw outputs
-✅ GitHub integration link in sidebar
+- Tab-based navigation (Dashboard, Uploads, Results, Question Papers, Answer Sheets)
+- Monospace typography (JetBrains Mono, Courier Prime) for technical aesthetic
+- Black and white minimalist design
+- Live progress indicator with status updates during processing
+- Comprehensive results display with parsed extraction and raw outputs
+- GitHub integration link in sidebar
 
 ### Dashboard
-✅ Real-time summary of all processed documents
-✅ Count of completed, failed, and processing results
-✅ Quick tips for improving OCR accuracy
-✅ AI Insight Hub section for monitoring
+- Real-time summary of all processed documents
+- Count of completed, failed, and processing results
+- Quick tips for improving OCR accuracy
+- AI Insight Hub section for monitoring
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -113,7 +113,7 @@ This microservice provides an end-to-end solution for:
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Backend
 - **Framework**: FastAPI (async/await, high performance)
@@ -142,7 +142,7 @@ This microservice provides an end-to-end solution for:
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 exam_grading_system/
@@ -179,7 +179,7 @@ exam_grading_system/
 
 ---
 
-## 📦 Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
 - Python 3.9+
@@ -224,13 +224,13 @@ pip install -r requirements.txt
 Create a `.env` file in the project root:
 ```env
 # MongoDB
-MONGODB_URL=mongodb+srv://username:password@cluster.mongodb.net/exam_grading?retryWrites=true&w=majority
+MONGO_URL=mongodb://localhost:27017
 
 # Google Gemini API
-GOOGLE_API_KEY=your_google_api_key_here
+GEMINI_API_KEY=your_google_api_key_here
 
-# OCR Configuration (optional)
-DEFAULT_OCR_ENGINE=tesseract
+# OpenRouter API Key for Qwen
+OPENROUTER_API_KEY=your_openrouter_api_key_here
 ```
 
 ### Step 6: Verify Tesseract Installation
@@ -250,7 +250,7 @@ sudo apt-get install tesseract-ocr
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 ### `app/core/config.py`
 Contains all application settings:
@@ -279,7 +279,7 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "")
 
 ---
 
-## 🚀 Running the Application
+## Running the Application
 
 ### Start the Backend Server
 ```bash
@@ -308,7 +308,7 @@ You should see:
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### Document Upload & Processing
 
@@ -418,7 +418,7 @@ You should see:
 
 ---
 
-## 💻 Frontend Usage
+## Frontend Usage
 
 ### Dashboard
 - Displays real-time statistics:
@@ -461,7 +461,7 @@ You should see:
 
 ---
 
-## 🧠 OCR Engines
+## OCR Engines
 
 ### Comparison
 
@@ -481,7 +481,7 @@ You should see:
 
 ---
 
-## 💾 Result Storage & Retrieval
+## Result Storage & Retrieval
 
 ### File Naming Strategy
 Results are saved with meaningful names based on extracted content:
@@ -527,7 +527,7 @@ If content extraction fails, falls back to original filename.
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Issue: "No active scans" on Dashboard
 **Solution**: Ensure saved results exist in the `results/` folder. Check that OCR tasks completed successfully.
@@ -558,7 +558,7 @@ If content extraction fails, falls back to original filename.
 
 ---
 
-## 🔧 Development Notes
+## Development Notes
 
 ### Adding a New OCR Engine
 1. Create `app/services/newengine_service.py`
@@ -590,7 +590,7 @@ This project is part of the Evalvia.Ai platform. All rights reserved.
 
 ---
 
-## 📞 Support
+## Support
 
 For issues or questions:
 1. Check the [Troubleshooting](#troubleshooting) section
@@ -600,25 +600,72 @@ For issues or questions:
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
-For production deployment:
+### Frontend Deployment on Vercel
+
+The frontend has been configured for seamless deployment on Vercel. Follow these steps:
+
+**Step 1: Prepare Your Repository**
+Ensure the `vercel.json` file exists in the project root (already included).
+
+**Step 2: Connect to Vercel**
+1. Go to https://vercel.com and sign in with your GitHub account
+2. Click **"Add New"** → **"Project"**
+3. Select the `Elavia-OCR` repository
+4. Click **"Import"**
+
+**Step 3: Configure Project Settings**
+1. **Framework Preset**: Select "Other"
+2. **Build Command**: Leave blank or set to `echo 'Frontend-only deployment'`
+3. **Output Directory**: Set to `exam_grading_system/static`
+4. **Root Directory**: Set to `exam_grading_system`
+5. Click **"Deploy"**
+
+**Step 4: After Deployment**
+- Your frontend will be live at `https://your-project.vercel.app`
+- Users will see a notice about the backend being on the free tier of Render
+- All API calls will connect to your Render backend at `https://your-backend.onrender.com`
+
+**Vercel Configuration Details:**
+- `vercel.json` includes rewrites for SPA routing (all routes → `index.html`)
+- HTML assets have no cache (always fresh)
+- Static assets (`/static/`) have 1-year cache for performance
+- Includes headers to prevent caching issues
+
+### Backend Deployment on Render (Optional - Future)
+
+When ready to deploy the backend:
+
+1. Create account at https://render.com
+2. Click **"New +"** → **"Web Service"**
+3. Select the GitHub repository
+4. Configure:
+   - **Name**: `elavia-ocr-api`
+   - **Environment**: `Python`
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `gunicorn app.main:app -w 4 -b 0.0.0.0:8000`
+   - **Plan**: Choose paid tier (free tier has limitations)
+5. Add environment variables:
+   - `MONGO_URL`: Your MongoDB Atlas connection string
+   - `GEMINI_API_KEY`: Your Google Gemini API key
+   - `OPENROUTER_API_KEY`: Your OpenRouter API key
+6. Deploy and update frontend API endpoints if needed
+
+### Production Deployment Best Practices
+
+For both frontend and backend:
 1. Set `DEBUG=False` in config
-2. Use production ASGI server: `gunicorn` or `uvicorn` with workers
-3. Configure CORS for frontend domain
-4. Use environment variables for all secrets
-5. Set up MongoDB Atlas for cloud database
-6. Use CDN for static assets
-7. Enable HTTPS
-
-Example production run:
-```bash
-gunicorn app.main:app -w 4 -b 0.0.0.0:8000
-```
+2. Use environment variables for all secrets
+3. Set up MongoDB Atlas for cloud database
+4. Enable HTTPS (automatic on Vercel and Render)
+5. Configure CORS for allowed domains
+6. Monitor API usage and performance
+7. Set up error logging and alerting
 
 ---
 
-**Built with ❤️ using FastAPI, MongoDB, and Vanilla JavaScript**
+**Built with FastAPI, MongoDB, and Vanilla JavaScript**
 
 **Version**: 1.0.0  
 **Last Updated**: November 26, 2025
