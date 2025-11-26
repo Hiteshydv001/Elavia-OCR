@@ -4,6 +4,23 @@
 
 ---
 
+## Video Demo
+
+**Watch the Platform in Action:**
+
+[![Elavia OCR Platform Demo](https://img.youtube.com/vi/w0uX_imnwuw/maxresdefault.jpg)](https://youtu.be/w0uX_imnwuw)
+
+**Click to watch:** [Complete Platform Walkthrough on YouTube](https://youtu.be/w0uX_imnwuw)
+
+**In this demo, you'll see:**
+- Multi-engine OCR processing with real-time progress
+- Results extraction and visualization
+- Dashboard statistics and analytics
+- PDF document viewing capabilities
+- Complete user workflow from upload to results
+
+---
+
 ## Table of Contents
 
 1. [Overview](#overview)
@@ -18,7 +35,7 @@
 10. [Frontend Usage](#frontend-usage)
 11. [OCR Engines](#ocr-engines)
 12. [Result Storage & Retrieval](#result-storage--retrieval)
-13. [Troubleshooting]
+13. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -425,6 +442,22 @@ You should see:
 ---
 
 ## Frontend Usage
+
+### Video Walkthrough
+
+Want to learn how to use the platform? Check out our **complete video demo:**
+
+[![Platform Demo](https://img.youtube.com/vi/w0uX_imnwuw/0.jpg)](https://youtu.be/w0uX_imnwuw)
+
+**Features covered in the video:**
+- Dashboard overview and real-time statistics
+- Multi-engine OCR processing and selection
+- Real-time progress tracking
+- Results extraction and viewing
+- PDF document management
+- Complete user workflow
+
+---
 
 ### Dashboard
 - Displays real-time statistics:

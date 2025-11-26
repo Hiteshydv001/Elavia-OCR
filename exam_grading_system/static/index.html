@@ -46,6 +46,7 @@
             <div class="nav-links">
                 <a class="nav-link" data-target="view-question-papers" href="#">Question Papers</a>
                 <a class="nav-link" data-target="view-answer-sheets" href="#">Answer Sheets</a>
+                <a class="nav-link" data-target="view-video-demo" href="#">Video Demo</a>
             </div>
         </div>
         <div class="sidebar-footer">
@@ -201,6 +202,39 @@
                 <div id="answer-sheets-viewer-wrapper" class="doc-viewer" style="display:none;">
                     <iframe id="answer-sheets-viewer" title="Answer Sheet Preview"></iframe>
                 </div>
+            </div>
+        </section>
+
+        <section id="view-video-demo" class="view-section">
+            <div class="main-grid" style="grid-template-columns: 1fr;">
+                <article class="card video-card">
+                    <div class="card-title">
+                        <h2>Platform Demo & Walkthrough</h2>
+                        <span>Watch how Elavia.Ai works</span>
+                    </div>
+                    <div class="video-container">
+                        <iframe 
+                            width="100%" 
+                            height="500" 
+                            src="https://www.youtube.com/embed/w0uX_imnwuw" 
+                            title="Elavia OCR Platform Demo" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-description">
+                        <h3>What You'll Learn:</h3>
+                        <ul>
+                            <li>Frontend navigation and key features overview</li>
+                            <li>Multi-engine OCR selection and processing</li>
+                            <li>Real-time progress tracking with live status updates</li>
+                            <li>Results viewing with parsed extraction and raw outputs</li>
+                            <li>PDF document viewing and management</li>
+                            <li>Dashboard statistics and analytics</li>
+                        </ul>
+                    </div>
+                </article>
             </div>
         </section>
     </main>
