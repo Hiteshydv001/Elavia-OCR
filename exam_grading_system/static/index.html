@@ -9,6 +9,21 @@
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
+<!-- Backend Connection Warning Modal -->
+<div id="backend-warning-modal" class="modal-overlay">
+    <div class="modal-content">
+        <h2>Backend Connection Notice</h2>
+        <p>The backend API is currently running on the free tier of Render. This means:</p>
+        <ul>
+            <li>API calls may experience delays due to cold starts</li>
+            <li>Processing may take longer than usual</li>
+            <li>Service may briefly pause if inactive</li>
+        </ul>
+        <p><strong>For the best experience, deploy the backend to a production-tier service.</strong></p>
+        <button id="close-backend-warning" class="btn-primary">Got it, Continue Exploring</button>
+    </div>
+</div>
+
 <div class="dashboard">
     <aside class="sidebar">
         <div class="brand">

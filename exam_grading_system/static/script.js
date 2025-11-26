@@ -31,6 +31,27 @@ const dashboardContent = document.getElementById('dashboard-content');
 let lastSavedResultsFetch = 0;
 const SAVED_RESULTS_THROTTLE_MS = 5000; // Throttle to 5 seconds
 
+// Show backend warning modal on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const backendWarningModal = document.getElementById('backend-warning-modal');
+    const closeWarningBtn = document.getElementById('close-backend-warning');
+    
+    if (backendWarningModal && closeWarningBtn) {
+        backendWarningModal.classList.remove('hidden');
+        
+        closeWarningBtn.addEventListener('click', () => {
+            backendWarningModal.classList.add('hidden');
+        });
+        
+        // Allow closing by clicking outside the modal
+        backendWarningModal.addEventListener('click', (event) => {
+            if (event.target === backendWarningModal) {
+                backendWarningModal.classList.add('hidden');
+            }
+        });
+    }
+});
+
 function activateSection(sectionId) {
     sections.forEach(section => {
         section.classList.toggle('active', section.id === sectionId);
