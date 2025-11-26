@@ -1,50 +1,15 @@
 // ===== Backend Connection Check =====
-// Check if backend is active before loading the app
+// Initialize app immediately for UI demo
 async function checkBackendConnection() {
-    const loadingScreen = document.getElementById('loading-screen');
-    const appContainer = document.getElementById('app-container');
     const mainStyles = document.getElementById('main-styles');
     
-    // Load main stylesheet
+    // Load main stylesheet immediately
     mainStyles.media = 'all';
     mainStyles.removeAttribute('media');
     
-    try {
-        // Try to reach the backend with a short timeout
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 3000);
-        
-        const response = await fetch('/api/question-papers', { 
-            method: 'GET',
-            signal: controller.signal
-        });
-        
-        clearTimeout(timeoutId);
-        
-        if (response.ok) {
-            // Backend is active - load the app immediately (no loading screen)
-            console.log('Backend connected successfully!');
-            
-            // Show app immediately, hide loading screen
-            loadingScreen.style.display = 'none';
-            appContainer.style.display = 'block';
-            initializeApp();
-            showBackendNotice();
-            return true;
-        } else {
-            throw new Error('Backend returned error status');
-        }
-    } catch (error) {
-        console.error('Backend connection failed:', error);
-        
-        // Backend unreachable - show app with notice
-        loadingScreen.style.display = 'none';
-        appContainer.style.display = 'block';
-        initializeApp();
-        showBackendNotice();
-        
-        return false;
-    }
+    // Initialize app and show deployment notice
+    initializeApp();
+    showBackendNotice();
 }
 
 // Show deployment notice to all visitors

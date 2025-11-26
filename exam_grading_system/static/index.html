@@ -54,14 +54,14 @@
 </head>
 <body>
 <!-- Loading screen shown initially -->
-<div id="loading-screen" class="loading-screen">
+<div id="loading-screen" class="loading-screen" style="display: none;">
     <div class="loading-spinner"></div>
     <p class="loading-text">Connecting to backend...</p>
     <p class="backend-status" id="backend-status">Checking connection...</p>
 </div>
 
-<!-- Main app (hidden until backend is active) -->
-<div id="app-container" style="display: none;">
+<!-- Main app (shown by default, hidden only if loading needed) -->
+<div id="app-container" style="display: block;">
 <!-- Backend Deployment Notice Modal -->
 <div id="backend-notice-modal" class="modal-overlay">
     <div class="modal-content deployment-notice">
